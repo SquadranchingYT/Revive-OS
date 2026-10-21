@@ -1,0 +1,7 @@
+{
+  "name": "Revive OS",
+  "description": "Next-generation unblocked gaming operating system with high-octane games, stealth cloak modes, customizable themes, and built-in apps.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
