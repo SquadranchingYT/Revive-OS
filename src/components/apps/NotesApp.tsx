@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Save, FileText, Check } from 'lucide-react';
 import { sounds } from '../../utils/soundEffects';
+import { safeStorage } from '../../utils/safeStorage';
 
 export const NotesApp: React.FC = () => {
   const [note, setNote] = useState(() => {
-    return (
-      localStorage.getItem('revive_notes') ||
+    return safeStorage.getItem(
+      'revive_notes',
       `REVIVE OS · SCRATCHPAD & GAME CHEATS\n======================================\n- Slope 3D: Stay centered; small taps are better than holding keys down.\n- Space Defender: Triple plasma blaster unlocks on Wave 2.\n- Tetris: Press 'C' to stash the straight 4-bar piece for a 4-line Tetris.\n- Panic Key: Press ']' whenever you need instant cover!`
     );
   });
@@ -13,7 +14,7 @@ export const NotesApp: React.FC = () => {
 
   const handleSave = () => {
     sounds.playBlip(620, 'sine', 0.05);
-    localStorage.setItem('revive_notes', note);
+    safeStorage.setItem('revive_notes', note);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };

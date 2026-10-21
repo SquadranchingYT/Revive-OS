@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Cpu, Zap, Activity, HardDrive, CheckCircle2, RotateCcw, Award } from 'lucide-react';
 import { sounds } from '../../utils/soundEffects';
+import { safeStorage } from '../../utils/safeStorage';
 
 export const SystemBenchApp: React.FC = () => {
   const [isBenchmarking, setIsBenchmarking] = useState(false);
   const [progress, setProgress] = useState(0);
   const [testPhase, setTestPhase] = useState('Idle');
   const [benchScore, setBenchScore] = useState<number | null>(() => {
-    const saved = localStorage.getItem('revive_bench_score');
+    const saved = safeStorage.getItem('revive_bench_score');
     return saved ? parseInt(saved, 10) : 12480;
   });
 
@@ -52,7 +53,7 @@ export const SystemBenchApp: React.FC = () => {
         setIsBenchmarking(false);
         const finalScore = Math.floor(13500 + Math.random() * 1800);
         setBenchScore(finalScore);
-        localStorage.setItem('revive_bench_score', finalScore.toString());
+        safeStorage.setItem('revive_bench_score', finalScore.toString());
         setTestPhase('Benchmark Complete');
         sounds.playScore();
       }

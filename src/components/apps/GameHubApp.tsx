@@ -4,6 +4,8 @@ import { GameItem } from '../../types/os';
 import { GAMES_CATALOG, arcadeImg } from '../../data/gamesList';
 import { sounds } from '../../utils/soundEffects';
 
+import { safeStorage } from '../../utils/safeStorage';
+
 interface GameHubAppProps {
   onLaunchGame: (gameId: string) => void;
 }
@@ -12,7 +14,12 @@ export const GameHubApp: React.FC<GameHubAppProps> = ({ onLaunchGame }) => {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<string>('All');
   const [favorites, setFavorites] = useState<string[]>(() => {
-    return JSON.parse(localStorage.getItem('revive_favorites') || '["slope", "space_defender", "tetris"]');
+    try {
+      const raw = safeStorage.getItem('revive_favorites', '["slope", "space_defender", "tetris"]');
+      return JSON.parse(raw);
+    } catch {
+      return ['slope', 'space_defender', 'tetris'];
+    }
   });
 
   const categories = ['All', 'Runner', 'Action', 'Arcade', 'Puzzle', 'Retro'];
@@ -22,7 +29,7 @@ export const GameHubApp: React.FC<GameHubAppProps> = ({ onLaunchGame }) => {
     sounds.playBlip(600, 'triangle', 0.04);
     setFavorites(prev => {
       const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
-      localStorage.setItem('revive_favorites', JSON.stringify(next));
+      safeStorage.setItem('revive_favorites', JSON.stringify(next));
       return next;
     });
   };

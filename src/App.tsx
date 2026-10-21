@@ -23,11 +23,12 @@ import { AudioLabApp } from './components/apps/AudioLabApp';
 import { SystemBenchApp } from './components/apps/SystemBenchApp';
 import { BootScreen } from './components/desktop/BootScreen';
 import { sounds } from './utils/soundEffects';
+import { safeStorage } from './utils/safeStorage';
 
 export default function App() {
-  const [themeId, setThemeId] = useState(() => localStorage.getItem('revive_theme') || 'cyber_onyx');
-  const [cloakId, setCloakId] = useState(() => localStorage.getItem('revive_cloak') || 'none');
-  const [panicKey, setPanicKey] = useState(() => localStorage.getItem('revive_panic_key') || ']');
+  const [themeId, setThemeId] = useState(() => safeStorage.getItem('revive_theme', 'cyber_onyx'));
+  const [cloakId, setCloakId] = useState(() => safeStorage.getItem('revive_cloak', 'none'));
+  const [panicKey, setPanicKey] = useState(() => safeStorage.getItem('revive_panic_key', ']'));
   const [isCloaked, setIsCloaked] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isStartOpen, setIsStartOpen] = useState(false);
@@ -226,17 +227,17 @@ export default function App() {
 
   const handleThemeChange = (id: string) => {
     setThemeId(id);
-    localStorage.setItem('revive_theme', id);
+    safeStorage.setItem('revive_theme', id);
   };
 
   const handleCloakChange = (id: string) => {
     setCloakId(id);
-    localStorage.setItem('revive_cloak', id);
+    safeStorage.setItem('revive_cloak', id);
   };
 
   const handlePanicKeyChange = (key: string) => {
     setPanicKey(key);
-    localStorage.setItem('revive_panic_key', key);
+    safeStorage.setItem('revive_panic_key', key);
   };
 
   return (

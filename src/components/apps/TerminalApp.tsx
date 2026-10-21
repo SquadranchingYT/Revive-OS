@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Terminal, CornerDownLeft } from 'lucide-react';
 import { GAMES_CATALOG } from '../../data/gamesList';
 import { sounds } from '../../utils/soundEffects';
+import { safeStorage } from '../../utils/safeStorage';
 
 interface TerminalAppProps {
   onLaunchGame: (gameId: string) => void;
@@ -90,12 +91,12 @@ export const TerminalApp: React.FC<TerminalAppProps> = ({ onLaunchGame, onSetThe
         break;
 
       case 'scores':
-        const sSlope = localStorage.getItem('revive_slope_high') || '0';
-        const sSpace = localStorage.getItem('revive_space_high') || '0';
-        const sTetris = localStorage.getItem('revive_tetris_high') || '0';
-        const sSnake = localStorage.getItem('revive_snake_high') || '0';
-        const sBreak = localStorage.getItem('revive_breakout_high') || '0';
-        const s2048 = localStorage.getItem('revive_2048_high') || '0';
+        const sSlope = safeStorage.getItem('revive_slope_high', '0');
+        const sSpace = safeStorage.getItem('revive_space_high', '0');
+        const sTetris = safeStorage.getItem('revive_tetris_high', '0');
+        const sSnake = safeStorage.getItem('revive_snake_high', '0');
+        const sBreak = safeStorage.getItem('revive_breakout_high', '0');
+        const s2048 = safeStorage.getItem('revive_2048_high', '0');
         newLogs.push({
           id: Date.now() + 1,
           text: `LOCAL HIGH SCORES:
