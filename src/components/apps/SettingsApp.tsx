@@ -1,5 +1,5 @@
 import React from 'react';
-import { Palette, Shield, Volume2, VolumeX, Keyboard, Check, Globe } from 'lucide-react';
+import { Palette, Shield, Volume2, VolumeX, Keyboard, Check, Globe, RotateCcw, Zap } from 'lucide-react';
 import { OS_THEMES, CLOAK_PRESETS } from '../../data/gamesList';
 import { sounds } from '../../utils/soundEffects';
 
@@ -12,6 +12,7 @@ interface SettingsAppProps {
   onPanicKeyChange: (key: string) => void;
   isMuted: boolean;
   onToggleMute: () => void;
+  onReboot?: () => void;
 }
 
 export const SettingsApp: React.FC<SettingsAppProps> = ({
@@ -22,7 +23,8 @@ export const SettingsApp: React.FC<SettingsAppProps> = ({
   panicKey,
   onPanicKeyChange,
   isMuted,
-  onToggleMute
+  onToggleMute,
+  onReboot
 }) => {
   return (
     <div className="w-full h-full bg-slate-950 text-slate-100 p-6 overflow-y-auto font-sans">
@@ -162,6 +164,43 @@ export const SettingsApp: React.FC<SettingsAppProps> = ({
           >
             {isMuted ? 'Muted' : 'Sound Enabled'}
           </button>
+        </div>
+
+        {/* Section 5: System Diagnostics & 4s Boot Speed */}
+        <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Zap className="w-4 h-4 text-amber-400" />
+              <h3 className="text-sm font-semibold text-white">System Startup & Bootload</h3>
+            </div>
+            <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-400">
+              4.0 SEC LOAD
+            </span>
+          </div>
+
+          <p className="text-xs text-slate-400 mb-4">
+            Revive OS initializes with a calibrated 4-second kernel bootloader, verifying WebGL compute pipelines, 26+ arcade games, and panic cloaking routines.
+          </p>
+
+          <div className="flex items-center justify-between p-3 rounded-lg bg-slate-950/60 border border-slate-800/80">
+            <div>
+              <div className="text-xs font-semibold text-slate-200">Reboot Revive OS</div>
+              <div className="text-[11px] text-slate-400">Restart the operating system and execute the 4-second bootload sequence</div>
+            </div>
+
+            {onReboot && (
+              <button
+                onClick={() => {
+                  sounds.playClick();
+                  onReboot();
+                }}
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/25 border border-cyan-500/40 text-cyan-300 hover:text-cyan-200 text-xs font-semibold transition-colors cursor-pointer"
+              >
+                <RotateCcw className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Run 4s Boot</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

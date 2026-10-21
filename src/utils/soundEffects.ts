@@ -58,6 +58,12 @@ class SoundEngine {
     this.playBlip(520, 'triangle', 0.04);
   }
 
+  public playStart() {
+    this.playBlip(440, 'triangle', 0.08);
+    setTimeout(() => this.playBlip(660, 'sine', 0.1), 80);
+    setTimeout(() => this.playBlip(880, 'sine', 0.15), 160);
+  }
+
   public playJump() {
     const ctx = this.getContext();
     if (!ctx) return;

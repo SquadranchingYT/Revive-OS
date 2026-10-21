@@ -16,6 +16,12 @@ import { PaintApp } from './components/apps/PaintApp';
 import { CalculatorApp } from './components/apps/CalculatorApp';
 import { BrowserApp } from './components/apps/BrowserApp';
 import { TaskManagerApp } from './components/apps/TaskManagerApp';
+import { BeatmakerApp } from './components/apps/BeatmakerApp';
+import { FileExplorerApp } from './components/apps/FileExplorerApp';
+import { TimerApp } from './components/apps/TimerApp';
+import { AudioLabApp } from './components/apps/AudioLabApp';
+import { SystemBenchApp } from './components/apps/SystemBenchApp';
+import { BootScreen } from './components/desktop/BootScreen';
 import { sounds } from './utils/soundEffects';
 
 export default function App() {
@@ -25,8 +31,13 @@ export default function App() {
   const [isCloaked, setIsCloaked] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isStartOpen, setIsStartOpen] = useState(false);
+  const [isBooting, setIsBooting] = useState(true);
   const [activeWindowId, setActiveWindowId] = useState<string | null>('win_gamehub');
   const [maxZ, setMaxZ] = useState(10);
+
+  const handleReboot = useCallback(() => {
+    setIsBooting(true);
+  }, []);
 
   // Initial Open Window: Revive Game Hub
   const [windows, setWindows] = useState<WindowItem[]>([
@@ -139,7 +150,12 @@ export default function App() {
       paint: { title: 'Paint Studio', icon: '🎨', width: 800, height: 560 },
       calculator: { title: 'Scientific Calculator', icon: '🔢', width: 420, height: 480 },
       browser: { title: 'Web Surfer', icon: '🌐', width: 880, height: 600 },
-      taskmanager: { title: 'Task Manager', icon: '📊', width: 620, height: 450 }
+      taskmanager: { title: 'Task Manager', icon: '📊', width: 620, height: 450 },
+      beatmaker: { title: 'Beatpad 808', icon: '🎛️', width: 720, height: 560 },
+      files: { title: 'File Explorer', icon: '📁', width: 680, height: 480 },
+      timer: { title: 'Focus Timer', icon: '⏱️', width: 440, height: 460 },
+      audiolab: { title: 'Revive Sound Lab', icon: '🎚️', width: 560, height: 540 },
+      systembench: { title: 'CyberBench Hardware Monitor', icon: '⚡', width: 640, height: 500 }
     };
 
     const config = appTitles[appId] || { title: 'Revive App', icon: '📁', width: 640, height: 480 };
@@ -264,6 +280,7 @@ export default function App() {
               onPanicKeyChange={handlePanicKeyChange}
               isMuted={isMuted}
               onToggleMute={toggleMute}
+              onReboot={handleReboot}
             />
           ) : win.appId === 'notes' ? (
             <NotesApp />
@@ -283,6 +300,16 @@ export default function App() {
             <BrowserApp />
           ) : win.appId === 'taskmanager' ? (
             <TaskManagerApp windows={windows} onCloseWindow={closeWindow} />
+          ) : win.appId === 'beatmaker' ? (
+            <BeatmakerApp />
+          ) : win.appId === 'files' ? (
+            <FileExplorerApp />
+          ) : win.appId === 'timer' ? (
+            <TimerApp />
+          ) : win.appId === 'audiolab' ? (
+            <AudioLabApp />
+          ) : win.appId === 'systembench' ? (
+            <SystemBenchApp />
           ) : null}
         </WindowFrame>
       ))}
@@ -294,6 +321,7 @@ export default function App() {
         onLaunchGame={launchGame}
         onLaunchApp={launchApp}
         onCloak={() => setIsCloaked(true)}
+        onReboot={handleReboot}
         theme={currentTheme}
       />
 
@@ -311,6 +339,14 @@ export default function App() {
         onToggleMute={toggleMute}
         theme={currentTheme}
       />
+
+      {/* 4-Second Boot & Loading Sequence */}
+      {isBooting && (
+        <BootScreen
+          durationMs={4000}
+          onComplete={() => setIsBooting(false)}
+        />
+      )}
     </div>
   );
 }

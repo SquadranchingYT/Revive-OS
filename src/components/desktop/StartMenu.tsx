@@ -12,7 +12,13 @@ import {
   Compass,
   Cpu,
   Flame,
-  Atom
+  Atom,
+  Sliders,
+  Folder,
+  Timer,
+  Activity,
+  Sparkles,
+  RotateCcw
 } from 'lucide-react';
 import { GAMES_CATALOG } from '../../data/gamesList';
 import { OSTheme } from '../../types/os';
@@ -24,6 +30,7 @@ interface StartMenuProps {
   onLaunchGame: (gameId: string) => void;
   onLaunchApp: (appId: string) => void;
   onCloak: () => void;
+  onReboot?: () => void;
   theme: OSTheme;
 }
 
@@ -33,6 +40,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
   onLaunchGame,
   onLaunchApp,
   onCloak,
+  onReboot,
   theme
 }) => {
   const [query, setQuery] = useState('');
@@ -40,13 +48,18 @@ export const StartMenu: React.FC<StartMenuProps> = ({
   if (!isOpen) return null;
 
   const coreApps = [
-    { id: 'gamehub', name: 'Revive Game Hub', icon: <Gamepad2 className="w-4 h-4 text-cyan-400" />, desc: 'Explore all 17 games' },
+    { id: 'gamehub', name: 'Revive Game Hub', icon: <Gamepad2 className="w-4 h-4 text-cyan-400" />, desc: `Explore all ${GAMES_CATALOG.length} games` },
+    { id: 'beatmaker', name: 'Beatpad 808', icon: <Sliders className="w-4 h-4 text-fuchsia-400" />, desc: 'Drum pad & 8-step sequencer' },
+    { id: 'audiolab', name: 'Sound Lab', icon: <Activity className="w-4 h-4 text-pink-400" />, desc: 'Cyber synth & voice modulator' },
+    { id: 'systembench', name: 'CyberBench', icon: <Sparkles className="w-4 h-4 text-indigo-400" />, desc: 'Hardware monitor & stress test' },
+    { id: 'files', name: 'File Explorer', icon: <Folder className="w-4 h-4 text-amber-400" />, desc: 'System files & documents' },
+    { id: 'timer', name: 'Focus Timer', icon: <Timer className="w-4 h-4 text-rose-400" />, desc: 'Stopwatch & Pomodoro' },
     { id: 'browser', name: 'Web Surfer', icon: <Compass className="w-4 h-4 text-sky-400" />, desc: 'Encyclopedia & math viewer' },
     { id: 'paint', name: 'Paint Studio', icon: <Paintbrush className="w-4 h-4 text-pink-400" />, desc: 'Neon drawing & PNG export' },
     { id: 'calculator', name: 'Calculator', icon: <Calculator className="w-4 h-4 text-teal-400" />, desc: 'Scientific math & history' },
     { id: 'taskmanager', name: 'Task Manager', icon: <Cpu className="w-4 h-4 text-indigo-400" />, desc: 'CPU, RAM & process control' },
     { id: 'terminal', name: 'Cyber Terminal', icon: <Terminal className="w-4 h-4 text-purple-400" />, desc: 'OS commands & cheats' },
-    { id: 'notes', name: 'Notes & Cheats', icon: <FileText className="w-4 h-4 text-amber-400" />, desc: 'Game codes & tips' },
+    { id: 'notes', name: 'Notes & Cheats', icon: <FileText className="w-4 h-4 text-yellow-400" />, desc: 'Game codes & tips' },
     { id: 'music', name: 'Synthesizer', icon: <Music className="w-4 h-4 text-rose-400" />, desc: 'Procedural chiptune player' },
     { id: 'settings', name: 'Control Panel', icon: <Settings className="w-4 h-4 text-slate-300" />, desc: 'Themes, cloaks & hotkeys' }
   ];
@@ -169,18 +182,35 @@ export const StartMenu: React.FC<StartMenuProps> = ({
           <span className="text-xs font-semibold text-slate-300">Revive OS v2.4</span>
         </div>
 
-        <button
-          onClick={() => {
-            sounds.playClick();
-            onCloak();
-            onClose();
-          }}
-          title="Instant stealth cloak"
-          className="flex items-center gap-1.5 px-2.5 py-1 bg-rose-950/60 hover:bg-rose-900 border border-rose-800/60 text-rose-300 rounded-lg text-xs font-medium transition-colors cursor-pointer"
-        >
-          <Shield className="w-3.5 h-3.5" />
-          <span>Panic Cloak</span>
-        </button>
+        <div className="flex items-center gap-2">
+          {onReboot && (
+            <button
+              onClick={() => {
+                sounds.playClick();
+                onClose();
+                onReboot();
+              }}
+              title="Reboot Revive OS (4s Load Sequence)"
+              className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-800/80 hover:bg-slate-700 border border-slate-700/80 text-slate-300 hover:text-white rounded-lg text-xs font-medium transition-colors cursor-pointer"
+            >
+              <RotateCcw className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">Restart</span>
+            </button>
+          )}
+
+          <button
+            onClick={() => {
+              sounds.playClick();
+              onCloak();
+              onClose();
+            }}
+            title="Instant stealth cloak"
+            className="flex items-center gap-1.5 px-2.5 py-1 bg-rose-950/60 hover:bg-rose-900 border border-rose-800/60 text-rose-300 rounded-lg text-xs font-medium transition-colors cursor-pointer"
+          >
+            <Shield className="w-3.5 h-3.5" />
+            <span>Panic Cloak</span>
+          </button>
+        </div>
       </div>
     </div>
   );

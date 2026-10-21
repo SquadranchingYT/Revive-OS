@@ -16,6 +16,15 @@ import { FlappyCyberGame } from './FlappyCyberGame';
 import { AsteroidsGame } from './AsteroidsGame';
 import { Connect4Game } from './Connect4Game';
 import { MemoryMatrixGame } from './MemoryMatrixGame';
+import { PacMazeGame } from './PacMazeGame';
+import { TowerDefenseGame } from './TowerDefenseGame';
+import { CyberCrosserGame } from './CyberCrosserGame';
+import { SudokuGame } from './SudokuGame';
+import { DunkHoopGame } from './DunkHoopGame';
+import { NeonPinballGame } from './NeonPinballGame';
+import { BlockBlastGame } from './BlockBlastGame';
+import { LunarLanderGame } from './LunarLanderGame';
+import { CyberArcheryGame } from './CyberArcheryGame';
 
 interface GameContainerProps {
   gameId: string;
@@ -57,6 +66,24 @@ export const GameContainer: React.FC<GameContainerProps> = ({ gameId }) => {
       return <Connect4Game />;
     case 'memory_matrix':
       return <MemoryMatrixGame />;
+    case 'pac_maze':
+      return <PacMazeGame />;
+    case 'tower_defense':
+      return <TowerDefenseGame />;
+    case 'cyber_crosser':
+      return <CyberCrosserGame />;
+    case 'sudoku':
+      return <SudokuGame />;
+    case 'dunk_hoop':
+      return <DunkHoopGame />;
+    case 'neon_pinball':
+      return <NeonPinballGame />;
+    case 'block_blast':
+      return <BlockBlastGame />;
+    case 'lunar_lander':
+      return <LunarLanderGame />;
+    case 'cyber_archery':
+      return <CyberArcheryGame />;
     default:
       return <SlopeRunnerGame />;
   }

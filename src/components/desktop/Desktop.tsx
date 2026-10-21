@@ -13,7 +13,14 @@ import {
   Compass,
   Cpu,
   Flame,
-  Atom
+  Atom,
+  Sliders,
+  Folder,
+  Timer,
+  Activity,
+  Sparkles,
+  Blocks,
+  Disc
 } from 'lucide-react';
 import { OSTheme } from '../../types/os';
 import { sounds } from '../../utils/soundEffects';
@@ -116,6 +123,55 @@ export const Desktop: React.FC<DesktopProps> = ({
       type: 'app' as const,
       appId: 'taskmanager',
       icon: <Cpu className="w-6 h-6 text-indigo-400" />
+    },
+    {
+      id: 'app_beatmaker',
+      title: 'Beatpad 808',
+      type: 'app' as const,
+      appId: 'beatmaker',
+      icon: <Sliders className="w-6 h-6 text-fuchsia-400" />
+    },
+    {
+      id: 'app_files',
+      title: 'File Explorer',
+      type: 'app' as const,
+      appId: 'files',
+      icon: <Folder className="w-6 h-6 text-amber-400" />
+    },
+    {
+      id: 'app_timer',
+      title: 'Focus Timer',
+      type: 'app' as const,
+      appId: 'timer',
+      icon: <Timer className="w-6 h-6 text-rose-400" />
+    },
+    {
+      id: 'game_pinball',
+      title: 'Cosmic Pinball',
+      type: 'game' as const,
+      gameId: 'neon_pinball',
+      icon: <Disc className="w-6 h-6 text-cyan-300" />
+    },
+    {
+      id: 'game_blockblast',
+      title: 'Gem Blast',
+      type: 'game' as const,
+      gameId: 'block_blast',
+      icon: <Blocks className="w-6 h-6 text-amber-300" />
+    },
+    {
+      id: 'app_audiolab',
+      title: 'Sound Lab',
+      type: 'app' as const,
+      appId: 'audiolab',
+      icon: <Activity className="w-6 h-6 text-pink-400" />
+    },
+    {
+      id: 'app_bench',
+      title: 'CyberBench',
+      type: 'app' as const,
+      appId: 'systembench',
+      icon: <Sparkles className="w-6 h-6 text-indigo-400" />
     },
     {
       id: 'app_settings',

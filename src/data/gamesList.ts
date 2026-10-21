@@ -7,8 +7,13 @@ import wallpaperImg from '../assets/images/revive_os_wallpaper_1792544995104.jpg
 import racerImg from '../assets/images/neon_drift_racer_1792545631785.jpg';
 import clickerImg from '../assets/images/cyber_core_clicker_1792545633000.jpg';
 import flappyImg from '../assets/images/flappy_cyber_1792545632319.jpg';
+import pacImg from '../assets/images/cyber_pac_maze_1792546156919.jpg';
+import turretImg from '../assets/images/cyber_turret_defense_1792546156910.jpg';
+import crosserImg from '../assets/images/cyber_crosser_road_1792546157610.jpg';
+import pinballImg from '../assets/images/neon_pinball_cover_1792546462973.jpg';
+import blockBlastImg from '../assets/images/block_blast_cover_1792546462969.jpg';
 
-export { wallpaperImg, arcadeImg, clickerImg };
+export { wallpaperImg, arcadeImg, clickerImg, pacImg, turretImg, crosserImg, pinballImg, blockBlastImg };
 
 export const GAMES_CATALOG: GameItem[] = [
   {
@@ -172,6 +177,56 @@ export const GAMES_CATALOG: GameItem[] = [
     isFeatured: false
   },
   {
+    id: 'pac_maze',
+    title: 'Cyber Pac Maze',
+    description: 'Neon blue labyrinth runner. Consume energy pellets, avoid chromatic cyber ghosts, and snatch power pellets to turn the hunt around.',
+    category: 'Retro',
+    image: pacImg,
+    controls: 'WASD or Arrow keys to steer Pac through the maze junctions.',
+    tags: ['Arcade', 'Maze', 'Retro', 'Classic'],
+    isFeatured: true
+  },
+  {
+    id: 'tower_defense',
+    title: 'Cyber Turret Defense',
+    description: 'Tactical sci-fi pathway defense. Position and upgrade Pulse Lasers, Plasma Cannons, and Cryo Freezers to stop robotic creep waves.',
+    category: 'Action',
+    image: turretImg,
+    controls: 'Click to place defense turrets on grid pads. Click turrets to upgrade or sell.',
+    tags: ['Strategy', 'Tower Defense', 'Tactics', 'Waves'],
+    isFeatured: true
+  },
+  {
+    id: 'cyber_crosser',
+    title: 'Cyber Crosser 3D',
+    description: 'High-octane isometric crossing runner. Hop across multi-lane autonomous highways, avoid hover trains, and cross plasma streams.',
+    category: 'Runner',
+    image: crosserImg,
+    controls: 'Arrow keys or WASD to leap forward, back, left, or right.',
+    tags: ['Reflex', 'Crossy', 'Isometric', 'Score'],
+    isFeatured: true
+  },
+  {
+    id: 'sudoku',
+    title: 'Cyber Sudoku OS',
+    description: 'The premier mathematical grid deduction puzzle. Fill the 9x9 matrix with numbers 1 through 9 with pencil notes and real-time validation.',
+    category: 'Puzzle',
+    image: wallpaperImg,
+    controls: 'Click any cell, then select a number from 1 to 9. Toggle Pencil mode for notes.',
+    tags: ['Puzzle', 'Logic', 'Brain', 'Numbers'],
+    isFeatured: false
+  },
+  {
+    id: 'dunk_hoop',
+    title: 'Neon Dunk Hoop',
+    description: 'Flapping arcade basketball challenge. Tap your thrusters with precise trajectory to dunk balls through suspended cyber hoops.',
+    category: 'Arcade',
+    image: arcadeImg,
+    controls: 'Click or Spacebar to flap the basketball into the moving hoops.',
+    tags: ['Arcade', 'Physics', 'Sports', 'Combo'],
+    isFeatured: false
+  },
+  {
     id: 'tictactoe',
     title: 'Tic-Tac-Toe AI Bot',
     description: 'Clean neon grid battle vs an unbeatable Minimax bot or play in casual 2-player mode.',
@@ -179,6 +234,46 @@ export const GAMES_CATALOG: GameItem[] = [
     image: wallpaperImg,
     controls: 'Click any tile on your turn to place X. Bot places O.',
     tags: ['Casual', 'Bot', 'Quick'],
+    isFeatured: false
+  },
+  {
+    id: 'neon_pinball',
+    title: 'Cosmic Pinball FX',
+    description: 'High-speed neon space arcade pinball. Fire flippers, rack up bumper combos, hit warp vortex multipliers, and avoid draining the silver ball.',
+    category: 'Arcade',
+    image: pinballImg,
+    controls: 'A/D or Left/Right Arrow for flippers. Spacebar or Arrow Down for plunger pull.',
+    tags: ['Arcade', 'Pinball', 'Physics', 'Retro'],
+    isFeatured: true
+  },
+  {
+    id: 'block_blast',
+    title: 'Galactic Gem Blast',
+    description: 'Sensational neon polyomino block puzzle. Place gem shapes onto the 8x8 matrix, clear full rows & columns, and trigger combo particle blasts.',
+    category: 'Puzzle',
+    image: blockBlastImg,
+    controls: 'Select a shape from the bottom tray, then click grid cells to place.',
+    tags: ['Puzzle', 'Block Blast', 'Addictive', 'Brain'],
+    isFeatured: true
+  },
+  {
+    id: 'lunar_lander',
+    title: 'Gravity Lunar Lander',
+    description: 'Master orbital mechanics and lunar thruster physics. Manage fuel, counteract gravity, and gently touch down on high-multiplier landing zones.',
+    category: 'Action',
+    image: spaceImg,
+    controls: 'W, Up Arrow, or Spacebar for main thruster. A/D or Left/Right Arrow to rotate RCS.',
+    tags: ['Physics', 'Space', 'Simulator', 'Retro'],
+    isFeatured: false
+  },
+  {
+    id: 'cyber_archery',
+    title: 'Neon Archery Master',
+    description: 'Precision target shooting. Draw bow tension, gauge crosswind vectors, and land bullseyes on floating holographic target rings.',
+    category: 'Arcade',
+    image: arcadeImg,
+    controls: 'Click and drag mouse/pointer to aim and draw power. Release to shoot arrow.',
+    tags: ['Skill', 'Target', 'Physics', 'Score'],
     isFeatured: false
   }
 ];
